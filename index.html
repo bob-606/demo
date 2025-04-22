@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>기준 무게별 자동 계산기</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    table { border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: center; }
+    th { background: #f3f3f3; }
+    input[type="number"] { width: 80px; }
+  </style>
+</head>
+<body>
+  <h2>기준 무게별 자동 계산기</h2>
+  <p>기준 무게(kg)를 입력하세요: 
+    <input type="number" id="weightInput" value="10" min="1" step="any">
+    <button onclick="recalculate()">계산</button>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>항목</th>
+        <th>값</th>
+      </tr>
+    </thead>
+    <tbody id="resultTable">
+      <!-- 결과가 여기에 표시됩니다 -->
+    </tbody>
+  </table>
+  <script>
+    // 10kg 기준 원본 값
+    const baseWeight = 10;
+    const baseValues = [100, 20, 30, 4, 20, 35, 15, 40, 50];
+
+    function recalculate() {
+      const inputWeight = parseFloat(document.getElementById('weightInput').value);
+      const ratio = inputWeight / baseWeight;
+      const resultTable = document.getElementById('resultTable');
+      resultTable.innerHTML = '';
+      baseValues.forEach((val, idx) => {
+        const newVal = (val * ratio).toFixed(2);
+        resultTable.innerHTML += `<tr><td>${idx + 1}</td><td>${newVal}</td></tr>`;
+      });
+    }
+
+    // 초기값 표시
+    recalculate();
+  </script>
+</body>
+</html>
