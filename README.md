@@ -1,3 +1,3 @@
 # demo
 
-simple caulator
+A simple caculator for production.
